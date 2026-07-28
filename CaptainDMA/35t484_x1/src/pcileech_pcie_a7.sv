@@ -122,6 +122,7 @@ module pcileech_pcie_a7(
         .pci_exp_rxn                ( pcie_rx_n                 ),  // <-
         .sys_clk                    ( pcie_clk_c                ),  // <-
         .sys_rst_n                  ( ~rst_pcie                 ),  // <-
+        .pipe_mmcm_lock_in          ( 1'b0                      ),  // <- unused (internal GT clocking, no external PIPE)
     
         // s_axis_tx (transmit data)
         .s_axis_tx_tdata            ( tlp_tx.data               ),  // <- [63:0]
@@ -149,6 +150,23 @@ module pcileech_pcie_a7(
         .cfg_mgmt_wr_rw1c_as_rw     ( ctx.cfg_mgmt_wr_rw1c_as_rw ), // <-
         .cfg_mgmt_di                ( ctx.cfg_mgmt_di           ),  // <- [31:0]
         .cfg_mgmt_wr_en             ( ctx.cfg_mgmt_wr_en        ),  // <-
+
+        // unused error-reporting interface - tied off (error injection not used)
+        .cfg_err_ecrc                  ( 1'b0                  ),  // <-
+        .cfg_err_ur                    ( 1'b0                  ),  // <-
+        .cfg_err_cpl_timeout            ( 1'b0                 ),  // <-
+        .cfg_err_cpl_unexpect           ( 1'b0                 ),  // <-
+        .cfg_err_cpl_abort              ( 1'b0                 ),  // <-
+        .cfg_err_posted                 ( 1'b0                 ),  // <-
+        .cfg_err_cor                    ( 1'b0                 ),  // <-
+        .cfg_err_atomic_egress_blocked  ( 1'b0                 ),  // <-
+        .cfg_err_internal_cor           ( 1'b0                 ),  // <-
+        .cfg_err_malformed              ( 1'b0                 ),  // <-
+        .cfg_err_mc_blocked             ( 1'b0                 ),  // <-
+        .cfg_err_poisoned               ( 1'b0                 ),  // <-
+        .cfg_err_norecovery             ( 1'b0                 ),  // <-
+        .cfg_err_locked                 ( 1'b0                 ),  // <-
+        .cfg_err_internal_uncor         ( 1'b0                 ),  // <-
     
         // special core config
         //.pcie_cfg_vend_id           ( dfifo_pcie.pcie_cfg_vend_id       ),  // <- [15:0]
